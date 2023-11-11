@@ -22,8 +22,15 @@ locals {
   environment_data = { for tuple in regexall("(.*)=(.*)", file("./.env")) : tuple[0] => tuple[1] }
 }
 
-module "markitos_aws_ec2" {
-  source                         = "../../markitos.aws.ec2"
-  markitos_aws_ec2_ami_image     = "ami-0e309a5f3a6dd97ea"
-  markitos_aws_ec2_instance_type = "t2.micro"
+module "markitos_aws_ec2_ssh_https_ssh_https" {
+  source                                   = "../../markitos.aws.ec2.ssh.https"
+  markitos_aws_ec2_ssh_https_ami_image     = "ami-0694d931cee176e7d"
+  markitos_aws_ec2_ssh_https_instance_type = "t2.micro"
+  markitos_aws_ec2_ssh_https_user_data     = <<-EOF
+    #!/bin/bash
+    apt update && apt install -y apache2 && \
+    systemctl enable apache2 && \
+    systemctl start apache2 && \
+    echo '<h1>hola</h1>' > /var/www/html/index.html
+    EOF
 }

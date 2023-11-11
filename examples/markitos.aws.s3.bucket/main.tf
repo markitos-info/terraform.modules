@@ -23,6 +23,6 @@ locals {
 }
 
 module "markitos_bucket" {
-  source       = "../../markitos.aws.s3.bucket"
-  bucket_names = ["markitos.aws.s3.bucket.example.1", "markitos.aws.s3.bucket.example.1"]
+  source                       = "../../markitos.aws.s3.bucket"
+  markitos_aws_s3_bucket_names = ["markitos.aws.s3.bucket.example.1", "markitos.aws.s3.bucket.example.1"]
 }

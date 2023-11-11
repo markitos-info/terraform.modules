@@ -3,15 +3,15 @@ Semantica para el nombre,titulo de los bloques de los modulos
 ============================================================
 para variables
 ============================================================
-variable "markitos_aws_ec2_ami_image" {
+variable "markitos_module_aws_ec2_ami_image" {
 description = "ec2 ami image"
 type = string
 nullable = false
 }
 
-markitos_aws_ec2_ami_image
+markitos_module_aws_ec2_ami_image
 ^^^^^^^^^^^^^^^^-^^^^^^^^^
-module-name------var-reason
+markitos_module_resource------var-reason
 ============================================================
 
 ============================================================
