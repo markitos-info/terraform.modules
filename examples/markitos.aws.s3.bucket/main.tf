@@ -22,13 +22,7 @@ locals {
   environment_data = { for tuple in regexall("(.*)=(.*)", file("./.env")) : tuple[0] => tuple[1] }
 }
 
-module "markitos_backend" {
-  source                    = "../../markitos.aws.s3.backend"
-  backend_env_file          = "./.env"
-  project_name              = "markitos_terramods"
-  backend_s3_region         = "eu-west-1"
-  backend_s3_bucket_encrypt = true
-  backend_s3_bucket_key     = "markitos-terramods/terraform/states"
-  backend_s3_bucket_id      = "markitos-terramods.terraform.state"
-  backend_dynamodb_table    = "markitos-terramods-main-terraform-lock"
+module "markitos_bucket" {
+  source       = "../../markitos.aws.s3.bucket"
+  bucket_names = ["markitos.aws.s3.bucket.example.1", "markitos.aws.s3.bucket.example.1"]
 }
