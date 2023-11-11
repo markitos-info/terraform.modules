@@ -6,10 +6,11 @@ resource "aws_vpc" "markitos_aws_ec2_ssh_https_vpc" {
   }))
 }
 resource "aws_subnet" "markitos_aws_ec2_ssh_https_public_subnet" {
-  vpc_id            = aws_vpc.markitos_aws_ec2_ssh_https_vpc.id
-  cidr_block        = local.markitos_aws_ec2_ssh_https_default_public_subnet_cidr_block
-  availability_zone = var.markitos_aws_ec2_ssh_https_az
-  depends_on        = [aws_vpc.markitos_aws_ec2_ssh_https_vpc]
+  vpc_id                  = aws_vpc.markitos_aws_ec2_ssh_https_vpc.id
+  cidr_block              = local.markitos_aws_ec2_ssh_https_default_public_subnet_cidr_block
+  map_public_ip_on_launch = true
+  availability_zone       = var.markitos_aws_ec2_ssh_https_az
+  depends_on              = [aws_vpc.markitos_aws_ec2_ssh_https_vpc]
 
   tags = (merge(local.tags, {
     Name = "${var.markitos_aws_ec2_ssh_https_project_name}-markitos_aws_ec2_ssh_https_public_subnets"
@@ -45,7 +46,6 @@ resource "aws_security_group" "markitos_aws_ec2_ssh_https_security_group" {
 }
 
 resource "aws_instance" "markitos_aws_ec2_ssh_https_instance" {
-
   ami                    = var.markitos_aws_ec2_ssh_https_ami_image
   instance_type          = var.markitos_aws_ec2_ssh_https_instance_type
   availability_zone      = var.markitos_aws_ec2_ssh_https_az

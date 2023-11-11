@@ -50,7 +50,6 @@ locals {
   }
   markitos_aws_ec2_ssh_https_default_vpc_cidr_block           = "10.10.0.0/16"
   markitos_aws_ec2_ssh_https_default_public_subnet_cidr_block = "10.10.1.0/24"
-
-  markitos_aws_ec2_ssh_https_default_web_ports = toset([80, 443, 22])
+  markitos_aws_ec2_ssh_https_default_web_ports                = toset([80, 443, 22])
 }
 
