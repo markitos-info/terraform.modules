@@ -28,9 +28,9 @@ module "markitos_aws_ec2_ssh_https_ssh_https" {
   markitos_aws_ec2_ssh_https_instance_type = "t2.micro"
   markitos_aws_ec2_ssh_https_user_data     = <<-EOF
     #!/bin/bash
-    apt update && apt install -y apache2 && \
-    systemctl enable apache2 && \
-    systemctl start apache2 && \
+    yum update && yum install -y httpd && \
+    systemctl enable httpd && \
+    systemctl start httpd && \
     echo '<h1>hola</h1>' > /var/www/html/index.html
     EOF
 }
