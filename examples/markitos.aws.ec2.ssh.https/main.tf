@@ -26,6 +26,7 @@ module "markitos_aws_ec2_ssh_https_ssh_https" {
   source                                   = "../../markitos.aws.ec2.ssh.https"
   markitos_aws_ec2_ssh_https_ami_image     = "ami-0694d931cee176e7d"
   markitos_aws_ec2_ssh_https_instance_type = "t2.micro"
+  markitos_aws_ec2_ssh_https_project_name  = "dbox"
   markitos_aws_ec2_ssh_https_user_data     = <<-EOF
     #!/bin/bash
     yum update && yum install -y httpd && \
