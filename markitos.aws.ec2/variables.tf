@@ -1,14 +1,14 @@
-variable "markitos_aws_ec2_ssh_https_project_name" {
+variable "markitos_aws_ec2_project_name" {
   description = "used as prefix name for all created blocks, only letters 3-20 chars"
   type        = string
   nullable    = false
   validation {
-    condition     = can(regex("^[aA-zZ]{3,20}$", var.markitos_aws_ec2_ssh_https_project_name))
+    condition     = can(regex("^[aA-zZ]{3,20}$", var.markitos_aws_ec2_project_name))
     error_message = "only letters between 3-20 chars"
   }
 }
 
-variable "markitos_aws_ec2_ssh_https_common_tags" {
+variable "markitos_aws_ec2_common_tags" {
   description = "common tags for all resources"
   type        = map(string)
   nullable    = false
@@ -18,38 +18,47 @@ variable "markitos_aws_ec2_ssh_https_common_tags" {
   }
 }
 
-variable "markitos_aws_ec2_ssh_https_ami_image" {
+variable "markitos_aws_ec2_ami_image" {
   description = "ec2 ami image"
   type        = string
   nullable    = false
 }
 
-variable "markitos_aws_ec2_ssh_https_instance_type" {
+variable "markitos_aws_ec2_type" {
   description = "ec2 instance type"
   type        = string
   nullable    = false
 }
 
-variable "markitos_aws_ec2_ssh_https_user_data" {
-  description = "ec2 user data for first boot"
+variable "markitos_aws_ec2_user_data" {
+  description = "optionally, ec2 user data for first boot"
   type        = string
-  nullable    = false
+  default     = ""
 }
 
-variable "markitos_aws_ec2_ssh_https_az" {
+variable "markitos_aws_ec2_az" {
   description = "network az"
   type        = string
   nullable    = false
   default     = "eu-west-1a"
 }
 
+variable "markitos_aws_ec2_vpc_security_group_ids" {
+  description = "list of security groups"
+  type        = list(string)
+  nullable    = false
+}
+
+variable "markitos_aws_ec2_subnet_id" {
+  description = "subnet id"
+  type        = string
+  nullable    = false
+}
+
 locals {
-  tags = {
+  markitos_aws_ec2_tags = {
     Author = "Marco Antonio - markitos"
     Module = "markitos.aws.ec2"
   }
-  markitos_aws_ec2_ssh_https_default_vpc_cidr_block           = "10.10.0.0/16"
-  markitos_aws_ec2_ssh_https_default_public_subnet_cidr_block = "10.10.1.0/24"
-  markitos_aws_ec2_ssh_https_default_web_ports                = toset([80, 443, 22])
 }
 
