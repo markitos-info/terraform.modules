@@ -3,12 +3,8 @@ variable "markitos_aws_security_group_vpc_id" {
   description = "vpc id"
 }
 
-variable "markitos_aws_security_group_ports" {
-  type        = set(number)
-  description = "list of ports"
-}
-
 locals {
+  markitos_aws_security_group_web_ports = toset([80, 22, 443])
   tags = {
     Author = "Marco Antonio - markitos"
     Module = "markitos.aws.security.group"

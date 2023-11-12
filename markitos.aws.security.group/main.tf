@@ -1,12 +1,12 @@
-resource "aws_security_group" "markitos_aws_security_group_ssh_http_https" {
-  name        = "markitos_aws_security_group_ssh_http_https allow ssh http/s access"
-  description = "markitos_aws_security_group_ssh_http_https Allow ssh http/s inbound traffic"
+resource "aws_security_group" "markitos_aws_security_group" {
+  name        = "markitos_aws_security_group allow access"
+  description = "markitos_aws_security_group Allow inbound traffic"
   vpc_id      = var.markitos_aws_security_group_vpc_id
 
   dynamic "ingress" {
-    for_each = local.markitos_aws_security_group_ports
+    for_each = toset(var.markitos_aws_security_group_ports)
     content {
-      description = "markitos_aws_security_group_ssh_http_https ingress port ${each.value}"
+      description = "markitos_aws_security_group ingress port ${ingress.value}"
       from_port   = ingress.value
       to_port     = ingress.value
       protocol    = "tcp"
@@ -14,6 +14,7 @@ resource "aws_security_group" "markitos_aws_security_group_ssh_http_https" {
     }
   }
   egress {
+    description = "markitos_aws_security_group egress all ports"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -21,6 +22,6 @@ resource "aws_security_group" "markitos_aws_security_group_ssh_http_https" {
   }
 
   tags = (merge(local.tags, {
-    Name = "markitos_aws_security_group_ssh_http_https"
+    Name = "markitos_aws_security_group"
   }))
 }
