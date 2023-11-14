@@ -7,36 +7,37 @@ variable "markitos_aws_ecs_ec2_project_name" {
     error_message = "only letters between 3-20 chars"
   }
 }
-variable "markitos_aws_ecs_ec2_launch_template_name_prefix" {
-  description = "used as prefix for ecs service"
-  type        = string
-  nullable    = false
-  validation {
-    condition     = can(regex("^[aA-zZ]{1,}[aA-zZ,0-9,_]{2,48}[aA-zZ]{1}$", var.markitos_aws_ecs_ec2_launch_template_name_prefix))
-    error_message = "only letters between 3-50 chars, start with letter and can contain _"
-  }
-}
-variable "markitos_aws_ecs_ec2_launch_template_image_id" {
-  description = "image id"
-  type        = string
-  nullable    = false
-}
+# variable "markitos_aws_ecs_ec2_lb_target_group_arn" {
+#   description = "target group for load balancer for aws ecs service"
+#   type        = string
+#   nullable    = false
+# }
 
-variable "markitos_aws_ecs_ec2_launch_template_instance_type" {
-  description = "ec2 instance type"
-  type        = string
-  nullable    = false
-}
-
-variable "markitos_aws_ecs_ec2_vpc_security_group_ids" {
-  description = "ecs ec2 security group ids"
+variable "markitos_aws_ecs_ec2_security_group_ids" {
+  description = "list of security groups"
   type        = set(string)
   nullable    = false
+}
+
+variable "markitos_aws_ecs_ec2_subnets_ids" {
+  description = "list of subnets ids"
+  type        = set(string)
+  nullable    = false
+}
+
+
+variable "markitos_aws_ecs_ec2_subnets" {
+  description = "list of subnets for vpc"
+  type = list(object({
+    markitos_aws_vpc_subnet_cidr_block       = string
+    markitos_aws_vpc_map_public_ip_on_launch = bool
+    markitos_aws_vpc_az                      = string
+  }))
 }
 
 locals {
   tags = {
     Author = "Marco Antonio - markitos"
-    Module = "markitos.aws.security.group"
+    Module = "markitos.aws.ecs.ec2"
   }
 }

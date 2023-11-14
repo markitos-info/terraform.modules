@@ -20,8 +20,8 @@ output "markitos_aws_public_subnet_igw_output_vpc_arn" {
 #:{.".}>----------------------
 
 #:{.".}>--- subnet outputs ---
-output "markitos_aws_public_subnet_igw_markitos_aws_public_subnet_igw_subnets_output" {
-  value = aws_subnet.markitos_aws_public_subnet_igw_subnet
+output "markitos_aws_public_subnet_igw_markitos_aws_public_subnet_igw_subnets_ids_output" {
+  value = aws_subnet.markitos_aws_public_subnet_igw_subnet[*].id
 }
 #:{.".}>----------------------
 
